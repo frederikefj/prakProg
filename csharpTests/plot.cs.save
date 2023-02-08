@@ -1,0 +1,6 @@
+class plot{
+  static void Main(){
+	System.Console.Write("12345678911234567892123456789312345678941234567895\n");
+  }
+}
+
