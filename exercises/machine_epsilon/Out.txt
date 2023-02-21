@@ -1,0 +1,7 @@
+my max int = 2147483647 int.MaxValue = 2147483647
+my min int = -2147483648 int.MinValue = -2147483648
+The smallest double is 4.44089209850063E-16
+and smallest float is 2.384186E-07
+sumA = 1 and sumB = 1.00000000011102
+is 1=1.0001 False
+is 1=1.0000000001 True

@@ -1,0 +1,6 @@
+a = 1 2 3
+b = -2 -4 -6
+ using ToString a = 1 2 3
+a.dot(b) = -28
+dot(b,b) = 56
+is a=b: False, is b=b: True
