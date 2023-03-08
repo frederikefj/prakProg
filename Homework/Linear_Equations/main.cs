@@ -4,48 +4,9 @@ using static System.Math;
 
 
 public static class main{
-public static class QRGS{	
-	public static void decomb(matrix A, matrix R){ 
-		int n = A.size1;
-		int m = A.size2;
-		for (int i = 0; i<m; i++) {
-			double Rii = 0;
-			for (int j = 0; j<n; j++) {
-				Rii += A[i][j]*A[i][j];
-				}
-			R[i][i] = Sqrt(Rii);
-			for (int j = 0; j<n; j++) {
-				A[i][j] = A[i][j]/Rii;
-				}
-				
-			for (int j = i; j<m; j++) {
-				double Rij = 0;
-				for (int k = 0; k<n; k++) {
-					Rij += A[i][k]*A[j][k];
-					}
-				R[i][j] = Rij;
-				WriteLine($"i{i}, j{j}, Rij");
-				for (int k = 0; k<n; k++) {
-					A[j][k] = A[j][k] - A[i][k]*Rij;
-					}			
-				}
-			WriteLine($"i = {i}, Rii = {Rii}");
-
-
-			}
-		}
-	public static vector solve(matrix Q, matrix R, vector b) {
-		var c = new vector(b.size);
-		return c;
-		}
-	public static double det(matrix R) {
-		return R[0][0];
-		}
-	}
-
 public static void Main(){
-	int n = 5;
-	int m = 3;
+	int n = 6;
+	int m = 6;
 	var randomNumber = new System.Random(1);
 	
 	var b = new vector(n);
@@ -60,20 +21,66 @@ public static void Main(){
 			}
 		}
 
-	var R = new matrix(m,m);
-	
+	var R = new matrix(m,m);	
+	var Q = A.copy();
+	QRGS.decomb(Q, R);
+
 	WriteLine($"Generating a random lenght:{n} vector (b) and size:{n}x{m} matrix (A):");
-	if(n<10){
-		WriteLine("b:");	
-		b.print();
-		WriteLine("A:");
-		A.print();
+	WriteLine("Preparing {m}x{m} matrix (R) and a copy of A (Q). Decomb used on matrix (Q).");
+	var QR = Q*R;	
+	bool QRapproxA = QR.approx(A);
+	WriteLine($"Is QR = A: {QRapproxA}");
+	var I = matrix.id(m);
+	var QTQ = Q.transpose()*Q;
+	bool QTQapproxI = QTQ.approx(I);
+	WriteLine($"Is T(Q)Q equal to 1: {QTQapproxI}");
+	bool isRupperT = true;
+	for (int i=0; i<m; i++) {
+		for (int j=0; j<i; j++) {
+			bool con = matrix.approx(R[i,j], 0);
+			if(con != true) {
+				isRupperT = false;
+				}
+			}
 		}
+	WriteLine($"Is R upper triangular: {isRupperT}");
 
-	QRGS.decomb(A, R);
+	if(n<10){
+		WriteLine($"\n   Because n={n}<10 Various matrixes are printed:");
+		WriteLine("\n   b:");	
+		b.print();
+		WriteLine("\n   A:");
+		A.print();	
+		WriteLine("\n   Q:");
+		Q.print();
+		WriteLine("\n   R:");
+		R.print();
+		
+		WriteLine("\n   T(Q)Q. T(Q)Q should be equal to I:");
+		QTQ.print();
+		WriteLine("\n   QR. QR should be equal to A:");
+		QR.print();
+	} else {
+		WriteLine($"\n   Matrix and tests not printed because n={n} is larger than 10");
+	}
 
-	A.print();
-	R.print();
+	
+	WriteLine("\nSolveing the differential equation Rx=T(Q)b. Solution x = ");
+	var s = QRGS.solve(Q, R, b);
+	s.print();
+	WriteLine("Checking that x is a solution by calculating Ax. Ax should be equal to b if the matrix is square:");
+	var As = A*s;
+	As.print();
+	WriteLine("Inverse of A:");
+	var B = QRGS.inverse(Q, R);
+	B.print();
 
+	WriteLine("Checking that AB = 1;");
+	var AB = A*B;
+	AB.print();
+	
+	WriteLine("Checking that BA = 1;");
+	var BA = B*A;
+	BA.print();
 }
 }
