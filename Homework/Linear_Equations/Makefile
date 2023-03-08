@@ -16,3 +16,17 @@ QRGS.dll : QRGS.cs matrix.dll
 
 clean : 
 	rm -f main.exe matrix.dll Out.dll
+
+decomp.exe : decomp.cs matrix.dll QRGS.dll
+	mcs -reference:matrix.dll -reference:QRGS.dll decomp.cs -target:exe -out:decomp.exe
+
+out.times.data : decomp.exe
+	>$@
+	for N in $$(seq 100 20 1000); do \
+		time --format "$$N %e" --output $@ --append \
+		mono $< -size:$$N 1>out 2>err ;\
+	done
+
+plot.svg : plot.gpi out.times.data
+	gnuplot $<
+
