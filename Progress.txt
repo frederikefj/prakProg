@@ -1,6 +1,5 @@
 Exercises:
-	posix - done
-	
+	Not yet verified
 
 Homework:
-	Linear_Equations - a), b) done
+	Linear_Equations - a), b) done. c) (needs fit to n^3))

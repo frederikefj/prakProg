@@ -1,12 +1,13 @@
 set terminal svg
 set key bottom right
 set output "plot.svg"
-set xlabel "Computation time (s)"
-set ylabel "Matrix size"
+set xlabel "Matrix size"
+set ylabel "Computation time (s)"
 set tics out
 set xzeroaxis
 set yzeroaxis
 set title "Decomposing a (n,n) matrix using QR"
-plot [0:1000][0:4.5] \
- "out.times.data" with lines linetype 1 title "" \
+plot [0:1500][0:16] \
+ "out.times.data" with lines linetype 1 title "data" \
+,"out.fit.data" with lines linetype 2 title "qubic fit" \
 #,gamma(x) with lines linetype 2 title "built-in gamma"

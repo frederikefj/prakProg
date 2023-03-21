@@ -1,0 +1,12 @@
+set terminal svg
+set key top right
+set output "dr_E0.svg"
+set xlabel "Seperation dr [Å]"
+set ylabel "Lowest eigen value E0 [Ha]"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set title "Lowest eigenvalue as a function of dr"
+plot [2:0][-0.505:0] \
+ "out.dr_E0.data" with lines linetype 1 title "data" \
+#,gamma(x) with lines linetype 2 title "built-in gamma"

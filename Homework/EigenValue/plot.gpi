@@ -1,0 +1,17 @@
+set terminal svg
+set key top right
+set output "plot.svg"
+set xlabel "distance from center r [Å]"
+set ylabel "Wavefunction value"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set title "Radial wavefunction for some low eigenvalues"
+plot [0:8][-0.1:0.63] \
+ "out.E0_plot.data" with points pt 7 ps 0.5 title "Lowest eigenvalue" \
+,"out.E1_plot.data" with points pt 5 ps 0.5 title "Second lowest eigenvalue" \
+,"out.E2_plot.data" with points pt 9 ps 0.5 title "Third lowest eigenvalue" \
+,"out.E0_analytical.data" with lines linetype 1 title "Analytical lowest eigenvalue" \
+,"out.E1_analytical.data" with lines linetype 2 title "Analytical 2. eigenvalue" \
+,"out.E2_analytical.data" with lines linetype 3 title "Analytical 3. eigenvalue" \
+#,gamma(x) with lines linetype 2 title "built-in gamma"
