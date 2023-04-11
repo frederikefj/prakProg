@@ -1,0 +1,40 @@
+
+###############[ Opgave A ]###############
+
+using test points:
+y = 0 1 2 3 6 9 10 13 15 18 19 
+y = 0 10 -20 -25 -5 30 40 5 10 -5 -50 
+
+Testing binsearch on z = 7.25, result = 4 | z should be between 6 and 9
+Testing linterp with z, f(z) = 9.58333333333333 | f(z) should be between -5 and 30
+Testing linterpInteg with z, result = -64.6354166666667
+
+Plot of points, interpolation and integration is shown in "Aplot.svg"
+
+
+###############[ Opgave B ]###############
+
+Quadratic interpolation on the same points as in A is shown in "Bplot.svg".
+Derivative and Integral is also shown in the plot.
+The condition used to resolve the final degree of freedom is c(1) = c(n-1).
+
+To further test the program it is used on some simple datasets and compared to manually calculated results:
+
+x={1,2,3,4,5}, y={1,1,1,1,1}:
+Manually calculated: b={0,0,0,0}, c={0,0,0,0}
+Results from code:
+b = {0, 0, 0, 0}
+c = {0, 0, 0, 0}
+
+x={1,2,3,4,5}, y={1,2,3,4,5}:
+Manually calculated: b={1,1,1,1}, c={0,0,0,0}
+Results from code:
+b = {1, 1, 1, 1}
+c = {0, 0, 0, 0}
+
+x={1,2,3,4,5}, y={1,4,9,16,25}:
+Manually calculated: b={2,4,6,8}, c={1,1,1,1}
+Results from code:
+b = {2, 4, 6, 8}
+c = {1, 1, 1, 1}
+

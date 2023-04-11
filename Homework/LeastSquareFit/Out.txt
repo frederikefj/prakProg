@@ -1,0 +1,19 @@
+
+###############[ Opgave A ]###############
+
+Solution to Ac=b, c:
+      4.95      -0.17 
+
+Halflife of Ra224 from given data: 4.08004641904341 d
+Halflife of Ra224 from "nucleardata.nuclear.lu.se": 3.66(4) d
+Plot of data with fit is shown in decayFit.svg
+
+###############[ Opgave B ]###############
+
+Covariance matrix for c:
+
+   0.00115  -0.000178 
+ -0.000178   4.83e-05 
+
+Halflife of Ra224 from data: 4.08004641904341 +- 0.166914715082983
+The modern value is not within the esimated uncertainties, (but at least its on the right scale)

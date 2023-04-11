@@ -1,0 +1,14 @@
+set terminal svg
+set key top left
+set output "Aplot.svg"
+set xlabel "y"
+set ylabel "x"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set title "Linear interpolation to points"
+plot [0:20][-100:100] \
+ "out.points.data" with points pt 7 ps 0.8 title "points" \
+,"out.fz.data" with lines linetype 3 title "Linear interpolation" \
+,"out.Integ.data" with lines linetype 4 title "Integral of interpolation" \
+#,gamma(x) with lines linetype 2 title "built-in gamma"
