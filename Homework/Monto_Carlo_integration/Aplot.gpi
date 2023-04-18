@@ -1,0 +1,15 @@
+set terminal svg
+set key top left
+set output "Aplot.svg"
+set xlabel "1/sqrt(N) (N: points used)"
+set ylabel "Error"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set title "Error of Monte Carlo integration as a function of points used"
+f(x) = a + b*x
+fit f(x) "out.error.data" using 1:2 via a, b
+plot [0:11][0:0.2] \
+ f(x) title "Linear fit"\
+,"out.error.data" with points pt 7 ps 0.8 title "Errors" 
+#,gamma(x) with lines linetype 2 title "built-in gamma"

@@ -1,0 +1,13 @@
+set terminal svg
+set key top right
+set output "Bplot.svg"
+set xlabel "points used"
+set ylabel "Error"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set logscale xy
+set title "Integration of cos^2(x)+sin^2(y) over [0,pi]^2"
+plot [1000:100000][0.00001:0.2] \
+ "out.errorQ.data" with points pt 7 ps 0.8 title "Quasirandom Error" \
+,"out.errorM.data" with points pt 5 ps 0.8 title "random Error"

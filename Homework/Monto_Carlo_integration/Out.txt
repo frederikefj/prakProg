@@ -1,0 +1,31 @@
+
+###############[ Opgave A ]###############
+
+multidimentional Monte Carlo-integration is implemented in the MonteCarlo.cs file (library).
+
+Integration of cos^2(x)+cos^2(y) over [0,pi]^2 using 1m points:
+Result: 9.86710135300706, error = 0.00493578331228198
+Expected result: pi^2=9.86960440108936
+
+Integration of a unit circle over [-1,1]^2 using 1m points:
+Result: 3.141628, error = 0.0016421587954933
+Expected result: pi=3.14159265358979
+
+Integration of 1.0/(1.0-cos(x)cos(y)cos(z)) over [0,pi]^3: using 1m points
+Result: 1.39301142403511, error = 0.00959317945461231
+Expected result: 1.3932039296856768591842462603255
+
+To check if the function scales as 1/sqrt(N) the error of the fit is plotted as a function of 1/sqrt(N) in the plot "Aplot.svg"
+A linear fit is also plotted to show that the error scales with 1/sqrt(N)
+
+
+###############[ Opgave B ]###############
+
+Monte Carlo-integration with psudorandom numbers is implemented in the MonteCarlo.cs file.
+The error is estimated by running the integration 2 times with different bases.
+
+Integration of cos^2(x)+cos^2(y) over [0,pi]^2 using 1m points:
+result = 9.86958851321026, error = 6.17690266994045E-06
+
+The error of the psudorandom method is compared to the regular Monte Carlo method using a log-log plot in "Bplot.svg"
+
