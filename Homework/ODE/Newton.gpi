@@ -1,0 +1,13 @@
+set terminal svg
+set key bottom right
+set output "Newton.svg"
+set xlabel "x"
+set ylabel "y"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set size ratio -1
+set title "Numeric solution to u''+u = 1 using RK12"
+plot [-2.2:2.2][-2.2:2.2] \
+ "out.Newton1.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines title "u(0)=1, u'(0)=0" \
+,"out.Newton2.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines title "u(0)=1, u'(0)=-0.5" 

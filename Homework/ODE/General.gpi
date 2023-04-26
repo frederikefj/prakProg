@@ -1,0 +1,12 @@
+set terminal svg
+set key bottom right
+set output "General.svg"
+set xlabel "x"
+set ylabel "y"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set size ratio -1
+set title "Numeric solution to u'' + u = 1 - 0.001u^2 using RK12"
+plot [-2.2:2.2][-2.2:2.2] \
+ "out.General.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines title "u(0)=1, u'(0)=-0.5" \

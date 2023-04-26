@@ -1,0 +1,10 @@
+
+###############[ Opgave 1 ]###############
+
+Loading the file numbers.txt into a genlist
+Printing the elements of the genlist
+ 1.50e+01 8.22e+00 9.33e+00 8.00e+00
+ 1.00e+00 2.00e+00 3.00e+00 4.00e+00 5.00e+00 6.00e+00
+ 7.00e+00 8.00e+00
+ 9.00e+00 1.08e+01
+

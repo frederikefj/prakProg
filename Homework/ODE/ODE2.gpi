@@ -1,0 +1,12 @@
+set terminal svg
+set key top right
+set output "ODE2.svg"
+set xlabel "x"
+set ylabel "y"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set title "Numeric solution to θ''=-0.25θ'-5sin(θ) using RK12"
+plot [0:10][-5:5] \
+ "out.ODE.data" with lines title "θ(t)" \
+,"out.ODE2.data" with points pt 7 ps 0.8 title "θ(t) sampled at specific x-values" 

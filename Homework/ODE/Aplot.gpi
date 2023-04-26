@@ -1,0 +1,11 @@
+set terminal svg
+set key top left
+set output "Aplot.svg"
+set xlabel "x"
+set ylabel "y"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set title "Numeric solution to u''=-u using RK12"
+plot [0:10][-1.1:1.1] \
+ "out.f1y.data" with points pt 7 ps 0.3 title "Numeric solution" 

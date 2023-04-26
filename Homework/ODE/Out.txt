@@ -1,0 +1,35 @@
+
+###############[ Opgave A ]###############
+
+Testing the RK12 stepper:
+y={1,0}, dydx={0,-1}
+Taking a step of size 0.1 from y to y2={0.995,-0.1}
+The errors are Ey2={-0.005,0}
+
+Running the driver with RK12 method on u''=-u from 0 to 10
+Like before y0 = {1,0}
+A graf of y(x) is shown in Aplot.svg
+The graf should follow a cos(x) curve which it does.
+
+To further test the program an example from scipy.integrate's documentation is reproduced
+A pendulum with friction is descriped by the ODE:
+θ''=-b*θ' - c*sin(θ)
+Using b=0.25, c=5 and starting the pendulum at θ'=0, θ=π-0.1
+Solution from 0 to 10 shown in the plot "ODE.svg"
+The plot looks like the one from scipy's documentation
+
+
+###############[ Opgave B ]###############
+
+Driver2 takes a genlist of x (optional) and only gives y at those values.
+Driver2 also investigates the tolorance/error seperatly for each component of y.
+First driver2 is tested using the ODE from A u''=-0.25u'-5sin(u):
+final at x=10 y=vector
+The values at 0,1,...,10 are plotted in "ODE2.svg" on top of the solution found in A.
+
+The driver is also tested on the equation of equatorial motion of a planet around a star:
+    u''(φ) + u(φ) = 1 + εu(φ)^2
+
+Where u is 1/r, r is radius, φ is the angle, ε is the relativistic correctionThe plot "Newton.svg" shows 2 classical orbits (ε=0) while the plot "General.svg" show an orbit with relativistic effects (ε=0.01).
+3 orbits (φ: 0 -> 6π) are shown in both plots. The newtonian orbits remain constant while the relativistic orbit precesses, which is the expected result.
+
