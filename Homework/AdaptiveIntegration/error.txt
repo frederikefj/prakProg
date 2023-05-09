@@ -1,0 +1,3 @@
+main.cs(19,21): error CS1525: Unexpected symbol `)'
+main.cs(19,22): error CS1525: Unexpected symbol `)'
+main.cs(24,246): error CS1525: Unexpected symbol `end-of-file'

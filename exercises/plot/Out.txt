@@ -1,0 +1,1 @@
+The error function, gamma function and log-gamma function are plotted along with tabulated values in the plots "error.svg", "gamma.svg" and "lngamma.svg" 

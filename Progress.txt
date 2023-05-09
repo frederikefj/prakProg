@@ -1,6 +1,3 @@
-Exercises:
-	Not yet verified
-
 Homework:
 =======================================
 | # |                | A | B | C |  Σ |
@@ -19,6 +16,24 @@ Homework:
 =======================================
 | 7 | Monte Carlo    | 6 | 3 | - | 54 |
 =======================================
+
+Exercises:
+======================
+posix           | done
+git             | done
+hello           | done
+math            | done
+machine epsilon | done
+vec             | done
+input/output    | done
+complex         | done
+wiki            | done
+generic lists   | done
+multiprocessing | done
+plot            | done
+======================
+
+
 
 
 

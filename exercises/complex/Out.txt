@@ -1,0 +1,30 @@
+Testing the cmath library:
+
+sqrt(-1)       = 6.12e-17+1i
+expected result: 0+1i
+Aproximatly equal: True
+
+sqrt(i)        = 0.707+0.707i
+expected result: 0.707+0.707i
+Aproximatly equal: True
+
+exp(i)         = 0.54+0.841i
+expected result: 0.54+0.841i
+Aproximatly equal: True
+
+exp(iπ)        = -1+1.22e-16i
+expected result: -1+0i
+Aproximatly equal: True
+
+i^i            = 0.208+0i
+expected result: 0.208+0i
+Aproximatly equal: True
+
+log(i)       = 0+1.57i
+expected result: 0+1.57i
+Aproximatly equal: True
+
+sin(PI*i)      = 0+11.5i
+expected result: 0+11.5i
+Aproximatly equal: True
+

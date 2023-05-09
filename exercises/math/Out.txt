@@ -2,5 +2,14 @@ sqrt2 = 1.4142135623731 should equal 2 when sqrt2^2 = 2
 5root2 = 1.14869835499704 and 5root2^5 = 2
 exp(pi) = 23.1406926327793
 pi^e = 22.459157718361
-gamma(1) = 0.999999989064903
-gamma(11) = 3628799.98539848
+gamma(1)        = 0.999999989064903
+expected result = 1 [(1-1)!]
+gamma(2)        = 0.999999989064903
+expected result = 1 [(2-1)!]
+gamma(3)        = 1.99999997812981
+expected result = 2 [(3-1)!]
+gamma(10)        = 362879.997652016
+expected result = 362880 [(10-1)!]
+lngamma(10)      = 362879.997652016
+expected result  = 12.8018274800815 [ln((10-1)!)]
+lngamma(-1) = NaN
