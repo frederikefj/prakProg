@@ -26,12 +26,12 @@ public static double erfAp(double x){
 	return 1-sum*Exp(-x*x);
 	}
 
-public static double erfH1(double t, double z) {return Exp(-Pow(z+(1.0-t)/t,2.0)/t/t);}
+public static double erfH1(double t, double z) {return Exp(-Pow(z+(1.0-t)/t,2.0))/t/t;}
 public static double erfH2(double t) {return Exp(-t*t);}
 
 public static double erfInt(double z, double d=0.001, double e=0.001) {
 	if(z<0) return -erfInt(-z, d, e);
-	if(/*z>1*/false) {
+	if(z>1) {
 		Func<double, double> fz = t => erfH1(t, z);
 		return 1-2.0/Sqrt(PI)*Integ.integrate(fz, 0.0, 1.0, d*Sqrt(PI)/2.0, e);
 		}
@@ -93,21 +93,59 @@ double eps = 0.000000001;
 WriteLine("z = 0.1:");
 WriteLine( "Tabulated:     0.112462916");
 WriteLine($"Approximation: {erfAp(0.1)}");
-WriteLine($"Integral:      {erfInt(0.1)}");
-WriteLine($"Max error:     {delta+erfInt(0.1)*eps}");
+WriteLine($"Integral:      {erfInt(0.1, delta, eps)}");
+WriteLine($"Max error:     {delta+erfInt(0.1, delta, eps)*eps}");
 
 WriteLine("z = 0.7:");
 WriteLine( "Tabulated:     0.677801194 	");
 WriteLine($"Approximation: {erfAp(0.7)}");
-WriteLine($"Integral:      {erfInt(0.7)}");
-WriteLine($"Max error:     {delta+erfInt(0.7)*eps}");
+WriteLine($"Integral:      {erfInt(0.7, delta, eps)}");
+WriteLine($"Max error:     {delta+erfInt(0.7, delta, eps)*eps}");
 
 WriteLine("z = 1.3:");
 WriteLine( "Tabulated:     0.934007945");
 WriteLine($"Approximation: {erfAp(1.3)}");
-WriteLine($"Integral:      {erfInt(1.3)}");
-WriteLine($"Max error:     {delta+erfInt(1.3)*eps}");
+WriteLine($"Integral:      {erfInt(1.3, delta, eps)}");
+WriteLine($"Max error:     {delta+erfInt(1.3, delta, eps)*eps}");
 
+WriteLine("z = 3.5:");
+WriteLine( "Tabulated:     0.999999257");
+WriteLine($"Approximation: {erfAp(3.5)}");
+WriteLine($"Integral:      {erfInt(3.5, delta, eps)}");
+WriteLine($"Max error:     {delta+erfInt(3.5, delta, eps)*eps}");
+
+WriteLine("With a maximal allow error of δ=1e-9 (and ε=1e-9) the integral representation is much better than the approximation.");
+
+
+WriteLine("A plot of the error function with tabulated values is shown in \"error.svg\"");
+{
+double a = 0;
+double b = 3;
+int N = 200;
+double[] tabX = {0, 0.1, 0.3, 0.5, 0.7, 1, 1.5, 2, 3};
+double[] tabY = {0, 
+		 0.112462916,
+		 0.328626759,
+		 0.520499878,
+		 0.677801194,
+		 0.842700793,
+		 0.966105146,
+	 	 0.995322265,
+		 0.999977910};
+
+string toWriteTab = $"";
+for(int i=0; i<tabX.Length; i++){
+	toWriteTab += $"{tabX[i]}\t{tabY[i]}\n";
+	}
+File.WriteAllText("out.erfTab.data", toWriteTab);
+
+string toWrite = $"";
+for(int i=0; i<N; i++) {
+	double xi = i*(b-a)/(N-1) + a;
+	toWrite += $"{xi}\t{erfInt(xi)}\n";
+	}
+File.WriteAllText("out.erf.data", toWrite);
+}
 
 // Opgave A end
 WriteLine("");
@@ -115,6 +153,34 @@ WriteLine("");
 WriteLine("\n###############[ Opgave B ]###############\n");
 // Opgave B star
 
+WriteLine("integration of 1/Sqrt(x) in [0,1] using different methods:");
+WriteLine("");
+
+(double integb1, int count1) = Integ.integrateCount(f2, 0, 1, 0.001, 0.001);
+(double integb2, int count2) = Integ.integrateClenshawCount(f2, 0, 1, 0.001, 0.001);
+
+WriteLine( "method                         | calls to function count | result: 2");
+WriteLine( "--------------------------------------------------------");
+WriteLine($"Ordinary integrater            | {count1}             | {integb1}");
+WriteLine($"Chenshaw-Curtis transformation | {count2}               | {integb2}");
+WriteLine($"Scipy quad                     | {231}              | {2.0000000000000004}");
+
+
+WriteLine("\nintegration of 1/Sqrt(x) in [0,1] using different methods:");
+WriteLine("");
+
+(double integb4, int count3) = Integ.integrateCount(f4, 0, 1, 0.001, 0.001);
+(double integb3, int count4) = Integ.integrateClenshawCount(f4, 0, 1, 0.001, 0.001);
+
+WriteLine( "method                         | calls to function count | result: -4");
+WriteLine( "--------------------------------------------------------------------");
+WriteLine($"Ordinary integrater            | {count3}              | {integb4}");
+WriteLine($"Chenshaw-Curtis transformation | {count4}                | {integb3}");
+WriteLine($"Scipy quad                     | {315}               | {-3.999999999999974}");
+
+WriteLine("");
+WriteLine("The integrator from scipy is more accurate and faster than ordinary integration method. But it seems to ignore the ε and δ i gave it.");
+WriteLine("The python code is in \"python3integrate.py\"");
 
 WriteLine("");
 // Opgave B end

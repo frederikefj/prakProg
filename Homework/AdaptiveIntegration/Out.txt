@@ -33,20 +33,45 @@ The integral error function is compared to the approximation from the plots exer
 z = 0.1:
 Tabulated:     0.112462916
 Approximation: 0.112462965622195
-Integral:      0.112462893687391
-Max error:     1.11246289368739E-09
+Integral:      0.112462916018284
+Max error:     1.11246291601828E-09
 z = 0.7:
 Tabulated:     0.677801194 	
 Approximation: 0.677801181856103
-Integral:      0.677791154283859
-Max error:     1.67779115428386E-09
+Integral:      0.677801193837428
+Max error:     1.67780119383743E-09
 z = 1.3:
 Tabulated:     0.934007945
 Approximation: 0.934008062438552
-Integral:      0.934008812808613
-Max error:     1.93400881280861E-09
+Integral:      0.934007946124287
+Max error:     1.93400794612429E-09
+z = 3.5:
+Tabulated:     0.999999257
+Approximation: 0.999999255782864
+Integral:      0.999999257063882
+Max error:     1.99999925706388E-09
+With a maximal allow error of δ=1e-9 (and ε=1e-9) the integral representation is much better than the approximation.
+A plot of the error function with tabulated values is shown in "error.svg"
 
 
 ###############[ Opgave B ]###############
 
+integration of 1/Sqrt(x) in [0,1] using different methods:
+
+method                         | calls to function count | result: 2
+--------------------------------------------------------
+Ordinary integrater            | 8572             | 1.99996150007805
+Chenshaw-Curtis transformation | 16               | 1.99999201046432
+Scipy quad                     | 231              | 2
+
+integration of 1/Sqrt(x) in [0,1] using different methods:
+
+method                         | calls to function count | result: -4
+--------------------------------------------------------------------
+Ordinary integrater            | 8604              | -3.99991705899915
+Chenshaw-Curtis transformation | 96                | -3.99987385646141
+Scipy quad                     | 315               | -3.99999999999997
+
+The integrator from scipy is more accurate and faster than ordinary integration method. But it seems to ignore the ε and δ i gave it.
+The python code is in "python3integrate.py"
 

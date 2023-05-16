@@ -1,6 +1,6 @@
-default : Out.txt
+default : Out.txt error.svg
 
-Out.txt : main.exe
+Out.txt out.erf.data out.erfTap.data : main.exe
 	mono main.exe > Out.txt -target:$@
 
 main.exe : main.cs matrix.dll Integ.dll
@@ -16,6 +16,5 @@ clean :
 Integ.dll : Integ.cs matrix.dll
 	mcs -target:library -reference:matrix.dll -out:./Integ.dll Integ.cs
 
-#Aplot.svg : Aplot.gpi out.f1y.data
-#	gnuplot $<
-
+error.svg : error.gpi out.erf.data out.erfTab.data
+	gnuplot error.gpi
