@@ -1,0 +1,15 @@
+
+###############[ Opgave A ]###############
+
+Finding the minimum of Rosenbrock's valley function:
+   f(x,y) = (1-x)^2 + 100(y-x^2)^2
+By finding the root of its gradient
+starting x: (-8, 10), starting f: (-172818, -10800)
+Number of function evaluations: 220047
+
+        -8         10 
+
+
+###############[ Opgave B ]###############
+
+
