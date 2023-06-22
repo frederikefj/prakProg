@@ -1,13 +1,27 @@
 
 ###############[ Opgave A ]###############
 
+Testing newton's method with back-tracking linesearch on some simple functions
+
+Finding the root of x^3 + x^2 + 1 starting on the other side of it's local minimum (at x=0)
+starting x: 1, starting f: 3
+Number of function evaluations: 22
+root: -1.46623060084053
+expected result: (-1.4656)
+
+Another simple test could be finding the minimum of exp(x^2+y^2) using the roots of it's gradiant
+starting x: (2, -4), starting f: (1940660781.63916, -3881321563.27832)
+Number of function evaluations: 76
+root: (0.00017568740586963, -0.000351374781793631)
+expected result: (0, 0)
+
 Finding the minimum of Rosenbrock's valley function:
    f(x,y) = (1-x)^2 + 100(y-x^2)^2
 By finding the root of its gradient
-starting x: (-8, 10), starting f: (-172818, -10800)
-Number of function evaluations: 220047
-
-        -8         10 
+starting x: (-1, 1), starting f: (-4, 0)
+Number of function evaluations: 4860
+root: (0.999933268921533, 0.99984729001253)
+expected result: (1, 1)
 
 
 ###############[ Opgave B ]###############

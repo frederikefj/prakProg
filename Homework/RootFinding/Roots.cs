@@ -21,30 +21,32 @@ public static matrix jacobi(Func<vector, vector> f, vector x, vector fx) {
 	return J;
 	}
 
-public static vector newton(Func<vector, vector> f, vector x0, double eps=1e-2) {
-	// make sure that the components of starting guess x is larger than sqrt(ε) (mashine epsilon) 
-	// So that the step to calculate the jacobi matrix doesn't get smaller than mashine epsilon
-	int callN = 1;
+public static (vector, int) newton(Func<vector, vector> f, vector x0, double eps=1e-2) {
+	int fCall = 0;
 	int n = x0.size; //Side of input vector
-	vector fx = f(x0); //The current value of f(x) is saved so it only needs to be calculated once each step
+	for(int i=0; i<n; i++) { 
+		if(Abs(x0[i])<Pow(2, -22)) x0[i] = Pow(2,-22);
+		}  // Prevents devision by zero in jacobi matrix calculation of starting value.
+	
+	vector fx = f(x0); fCall++; //The current value of f(x) is saved so it only needs to be calculated once each step
 	int m = fx.size;
 	if(n!=m) throw new ArgumentException($"f must have dimension n->n but {n}->{m} was given");
+	
 	vector x = x0.copy();
 	while(fx.norm()>=eps) 
 		{
 		matrix R = new matrix(n, n);
-		matrix J = jacobi(f, x, fx);
+		matrix J = jacobi(f, x, fx); fCall += n;	
 		QRGS.decomb(J, R);
-		vector dx = QRGS.solve(J, R, -fx);
+		vector dx = QRGS.solve(J, R, -fx); for(int i=0; i<n; i++) {if(Abs(dx[i])<Pow(2, -26)) break;}
 		double l = 1;
 		while(true) {
-			vector fxi = f(x+l*dx); callN++;
-			if(fxi.norm() < (1-l/2)*fx.norm()) {x=x+l*dx; fx=fxi; break;}
+			vector fxi = f(x+l*dx); fCall++;
+			if(fxi.norm() < (1-l/2)*fx.norm() | l<=1.0/1024) {x=x+l*dx; fx=fxi; break;}
 			else {l*=0.5;}
 			}
 		}
-	WriteLine($"Number of function evaluations: {callN}");
-	return x0;
+	return (x, fCall);
 	}
 
 
