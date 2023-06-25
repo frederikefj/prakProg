@@ -39,15 +39,15 @@ public points(int d,int n0, int startBase = -1) {
 	}
 }
 
-	public double distance(vector a) {
-		if(a.size != x[0].size) throw new ArgumentException($"points.dist: vector(d={a.size}) does not match dimension of points(d={x[0].size})");
-		double minDist = (x[0]-a).norm();
-	       	for(int i=1; i<n; i++) {
-			double iDist = (x[i]-a).norm();
-			if(iDist < minDist) minDist = iDist; 
-			}	
-		return minDist;
-		}
+public double distance(vector a) {
+	if(a.size != x[0].size) throw new ArgumentException($"points.dist: vector(d={a.size}) does not match dimension of points(d={x[0].size})");
+	double minDist = (x[0]-a).norm();
+	for(int i=1; i<n; i++) {
+		double iDist = (x[i]-a).norm();
+		if(iDist < minDist) minDist = iDist; 
+		}	
+	return minDist;
+	}
 		
 }
 
@@ -61,6 +61,7 @@ vector a = new vector(2);
 double da = points1.distance(a);
 a.print();
 WriteLine($"distance from a to closest point: {da}");
+WriteLine($"{System.Time}");
 
 // Opgave A end
 WriteLine("");

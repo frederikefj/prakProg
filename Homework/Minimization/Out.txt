@@ -1,6 +1,30 @@
 
 ###############[ Opgave A ]###############
 
+Testing the quasi newton minimizer with some different functions:
+
+Finding a minimum of f(x,y)=x^4-7y^3-32x^2+y^2
+which has minima at (-2.16,0) and (7.41,0)
+starting at (10, -4)
+number of steps to converge: 10
+Minimum is found at x=(7.40941472436369, 0.00134034112538757) with accuracy: 1e-3
+The number of function evaluations used was 86
+
+Finding the minimum of Rosenbrock's valley function
+f(x,y)=(1-x)^2+100(y-x^2)^2
+which has a single minima at (1,1)
+starting at (-2, 3)
+number of steps to converge: 54
+Minimum is found at x=(0.999993890757329, 0.999987744740775) with accuracy: 1e-3
+The number of function evaluations used was 462
+
+Finding a minimum of Himmelblau's function
+f(x,y)=(x^2-y-11)^2 + (x+y^2-7)^2
+which has minima at (3,2), (-2.81, 3.13), (-3.78, -3.28) and (3.58, -1.85)
+starting at (-6, 5)
+number of steps to converge: 11
+Minimum is found at x=(3.58442789006947, -1.8481264184236) with accuracy: 1e-3
+The number of function evaluations used was 99
 
 
 ###############[ Opgave B ]###############

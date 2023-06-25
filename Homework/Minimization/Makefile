@@ -20,5 +20,5 @@ clean :
 #	gnuplot $<
 
 
-#spline.dll : spline.cs matrix.dll
-#	mcs -target:library -reference:matrix.dll -out:./spline.dll spline.cs
+mini.dll : mini.cs matrix.dll
+	mcs -target:library -reference:matrix.dll -out:./mini.dll mini.cs

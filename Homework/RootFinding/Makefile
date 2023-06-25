@@ -14,9 +14,6 @@ DIR2 = ../Linear_Equations
 QRGS.dll : $(DIR2)/QRGS.cs matrix.dll
 	mcs -reference:matrix.dll -target:library -out:./QRGS.dll $(DIR2)/QRGS.cs
 
-#QRGS.dll : MalteQRGS.cs matrix.dll
-#	mcs -reference:matrix.dll -target:library -out:./QRGS.dll MalteQRGS.cs
-
 clean :
 	$(RM) *.dll *.exe [Oo]ut* *.svg
 
