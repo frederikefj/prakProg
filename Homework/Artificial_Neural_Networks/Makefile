@@ -20,6 +20,6 @@ matrix.dll : $(DIR)/matrix.cs $(DIR)/vector.cs
 clean :
 	$(RM) *.dll *.exe [Oo]ut* *.svg
 
-mini.dll : mini.cs matrix.dll ; $(MKDLL)
+mini.dll : ../Minimization/mini.cs matrix.dll ; $(MKDLL)
 
 

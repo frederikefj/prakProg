@@ -1,9 +1,22 @@
 
 ###############[ Opgave A ]###############
 
-         0          0 
-distance from a to closest point: 0.238964691533552
-06/22/2023 17:20:13
+For a simple test of the global optimizer a sum of narrow guassian functions is used.
+The negatice gaussian functions are narrow enough that the global minimum is about
+at the "peak" of the largest guassian in each dimension. x: (1, 2, 3, 4)
+
+The function is sampled for 1 seconds and the quasi-Newton minimizer
+was given an accuarcy of 1e-3.
+Minimum is found at x: (0.999998357527363,1.99983285306026, 2.99977573559262, 3.99974614099623)
+
+Another function with a large number of local minimum is minus
+the distance from the nearest point in a group of random numbers
+For points y1->yn it would be f(x)=-max|x-yi| for x in [0,1]^2
+
+The function is sampled for 1 seconds and the quasi-Newton minimizer
+was given an accuarcy of 1e-3.
+Minimum is found at x: (0.725026203372088,0.715298616920973)
+A plot of the points is shown in "points.svg"
 
 
 ###############[ Opgave B ]###############

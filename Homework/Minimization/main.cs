@@ -2,7 +2,7 @@ using System;
 using static System.Console;
 using static System.Math;
 using System.IO;
-
+/*
 public static class Mini{
 
 public static vector gradient(Func<vector, double> f,
@@ -68,7 +68,7 @@ public static vector qnewton(
 	return min;	
 	}
 } // class: Mini, end
-
+*/
 
 class main{
 public static int test2N = 0;
