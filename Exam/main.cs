@@ -10,7 +10,8 @@ public static vector quasiRandomMin(Func<vector,
 	       	vector a,
 	       	vector b,
 		double time = 10,
-	       	double acc = 0.001) {
+		double acc = 0.001,
+		string localMinimizer = "qnewton") {
 	int d = a.size; if(b.size != d) throw new ArgumentException($"a(dim: {a.size}) and b(dim: {b.size}) does not have the same dimension");
 	vector x = new vector(d);
 	vector x0 = 0.5*(a+b);
@@ -25,9 +26,24 @@ public static vector quasiRandomMin(Func<vector,
 		if(fi<fmin) {fmin = fi; x0 = x.copy();}
 		i++;
 		}
-	
 
-	vector min = Mini.qnewton(f, x0, acc);
+	vector min = new vector(d);	
+	if(localMinimizer == "qnewton") {
+		min = Mini.qnewton(f, x0, acc);
+	}
+	if(localMinimizer == "simplex") {
+		var random = new Random();
+		matrix P = new matrix(d, d+1);
+		// randomly distributes d+1 points around the current global minimum (x0)
+	       	for(int j=0; j<d+1; j++) {
+			for(int k=0; k<d; k++) {
+				double r = random.NextDouble();
+				P[j][k] = (b[k]-a[k])/Pow(i, 1.0/d)*(2*r-1)/2 + x0[k];
+			}
+		}
+		P.print();
+		min = Mini.simplex(f, P, acc);
+	}
 	return min;
 	}
 
@@ -62,7 +78,7 @@ WriteLine("The negatice gaussian functions are narrow enough that the global min
 WriteLine("at the \"peak\" of the largest guassian in each dimension. x: (1, 2, 3, 4)");
 WriteLine("");
 
-vector min1 = globalMini.quasiRandomMin(f1, a1, b1, time1);
+vector min1 = globalMini.quasiRandomMin(f1, a1, b1, time1, 1e-6, localMinimizer: "simplex");
 WriteLine($"The function is sampled for {time1} seconds and the quasi-Newton minimizer");
 WriteLine($"was given an accuarcy of 1e-3.");
 WriteLine($"Minimum is found at x: ({min1[0]},{min1[1]}, {min1[2]}, {min1[3]})");

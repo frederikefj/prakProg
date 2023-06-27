@@ -49,6 +49,12 @@ public void train(vector xi, vector yi) {
 	p = pmin;
 	}
 
+public void trainG(vector xi, vector yi, double time) {
+	x = xi.copy(); y = yi.copy(); N = x.size;	
+	vector pmin = Mini.qnewton(cost, p.copy());
+	p = pmin;
+}
+
 public void gwaveletP0(vector xi, vector yi) {	
 	x = xi.copy(); y = yi.copy(); N = x.size;
 	
@@ -110,9 +116,9 @@ WriteLine("\n###############[ Opgave A ]###############\n");
 // Opgave A start
 
 
+int n = 9;
 WriteLine($"Fitting to the function g with a neural network with {n} neurons.");
 WriteLine("  g(x) = cos(5x-1)exp(-x^2) for x in [-1,1]");
-n = 9;
 var ann1 = new ann(n);
 
 int N = 100;

@@ -5,9 +5,15 @@ For a simple test of the global optimizer a sum of narrow guassian functions is 
 The negatice gaussian functions are narrow enough that the global minimum is about
 at the "peak" of the largest guassian in each dimension. x: (1, 2, 3, 4)
 
+
+      1.09       1.01       1.09       1.04        1.1 
+      2.05       2.03          2       1.96       1.94 
+      3.08       2.96       3.08       2.97       2.99 
+      3.97       3.89       3.91          4       3.96 
+d=4
 The function is sampled for 1 seconds and the quasi-Newton minimizer
 was given an accuarcy of 1e-3.
-Minimum is found at x: (0.999998357527363,1.99983285306026, 2.99977573559262, 3.99974614099623)
+Minimum is found at x: (0.999999541678938,1.99983146014028, 2.99977585171099, 3.99974772467839)
 
 Another function with a large number of local minimum is minus
 the distance from the nearest point in a group of random numbers
@@ -15,7 +21,7 @@ For points y1->yn it would be f(x)=-max|x-yi| for x in [0,1]^2
 
 The function is sampled for 1 seconds and the quasi-Newton minimizer
 was given an accuarcy of 1e-3.
-Minimum is found at x: (0.725026203372088,0.715298616920973)
+Minimum is found at x: (0.28674638257101,0.118514601245748)
 A plot of the points is shown in "points.svg"
 
 

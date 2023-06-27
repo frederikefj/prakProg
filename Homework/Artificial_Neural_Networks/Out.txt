@@ -1,7 +1,8 @@
 
 ###############[ Opgave A ]###############
 
-ann1(2): 1.62050651595733E-06
+Fitting to the function g with a neural network with 9 neurons.
+  g(x) = cos(5x-1)exp(-x^2) for x in [-1,1]
 
 
 ###############[ Opgave B ]###############
