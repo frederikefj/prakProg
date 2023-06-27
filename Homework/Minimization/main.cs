@@ -131,5 +131,24 @@ WriteLine("\n###############[ Opgave B ]###############\n");
 
 // Opgave B end
 WriteLine("");
+
+
+WriteLine("\n###############[ Opgave C ]###############\n");
+// Opgave B start
+
+int d = 2;
+matrix P = new matrix(d, d+1);
+P[0][0]=2; P[0][1]=0;
+P[1][0]=0; P[1][1]=0;
+P[2][0]=0; P[2][1]=2;
+valleyN = 0;
+
+vector minS = Mini.simplex(valley, P, printData: true);
+minS.print();
+WriteLine($"Number of function calls {valleyN}");
+
+
+// Opgave B end
+WriteLine("");
 }
 }

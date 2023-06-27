@@ -30,3 +30,12 @@ The number of function evaluations used was 99
 ###############[ Opgave B ]###############
 
 
+
+###############[ Opgave C ]###############
+
+d=2
+Simplex converged using 28 reflections, 9 expansions,
+ 20 contractions and 21 reductions.
+         1      0.999 
+Number of function calls 125
+

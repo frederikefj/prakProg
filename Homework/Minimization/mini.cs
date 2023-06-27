@@ -67,4 +67,127 @@ public static vector qnewton(
 	if(printSteps==true) WriteLine($"number of steps to converge: {steps}");
 	return min;	
 	}
-} // class: Mini, end
+
+private static double simplexSize(matrix P) {
+	int d = P.size1;
+	vector avg = new vector(d);
+	for(int i=0; i<d+1; i++) {
+		avg += P[i]/(d+1);
+		}
+	double distMax = (P[0]-avg).norm();
+	double distI=0;
+	for(int i=1; i<d+1; i++)
+		distI = (P[i]-avg).norm();
+		if(distI>distMax) distMax=distI;
+	return distMax;
+	}
+
+
+// downhill simplex
+// takes a function f of d variables and
+// a matrix P with d+1 columns of d dimentional vectors
+// and does uses the downhill simplex algoritm from there
+// the function stops when the maximum distance from the 
+// center is less than eps
+public static vector simplex(Func<vector, double> f,
+	       	matrix P,
+	       	double eps=1e-3,
+		bool printData = false,
+		int maxLoops = 10000
+		) {
+
+	int d = P.size1;
+	WriteLine($"d={d}");
+	vector fP = new vector(d+1);
+	for(int i=0; i<d+1; i++) fP[i] = f(P[i]);
+
+	double fplo; // function value of highest point
+	int iplo; // index of highest value point
+	double fphi; // function value of lowest point
+	int iphi; // index of lowest point
+		  //
+	vector pce = new vector(d);
+	vector pre; double fpre; // reflection vector and value
+	vector pex; double fpex; // expansion vector and value
+	vector pco; double fpco; // contraction vector and value
+	
+	// counters to track the simplex:
+	int Nloop=0; int Nre=0; int Nex=0; int Nco=0; int Nrd=0;
+
+	while(!(simplexSize(P)<eps)) {
+		// Check if simplex converged
+		if(Nloop>maxLoops) {
+			throw new ArgumentException($"Simplex did not converge before (maxLoops: {maxLoops}) was reached");
+			}
+		Nloop++;
+		
+		// update highest lowest vectors
+		fplo = fP[0]; iplo=0;
+		fphi = fP[0]; iphi=0;
+		for(int i=1; i<d+1; i++) {
+			if(fP[i]<fplo) {fplo=fP[i]; iplo = i;}
+			if(fP[i]>fphi) {fphi=fP[i]; iphi = i;}
+			}
+		
+		// update centroid vector
+		pce *= 0;
+		for(int i=0; i<d+1; i++) {
+			if(i!=iphi) pce+=P[i]/d;
+		}
+		pre = pce + (pce-P[iphi]);
+		fpre = f(pre);
+		
+		// choose path
+		if(fpre<fplo) {
+			pex = pce + 2*(pce-P[iphi]);
+			fpex = f(pex);
+			if(fpex<fpre) {
+				P[iphi] = pex.copy(); // accept expansion
+				fP[iphi] = fpex; Nex++;
+			} else {
+				P[iphi] = pre.copy(); // accept reflection
+				fP[iphi] = fpre; Nre++;
+			}
+		} else {
+			if(fpre<fphi) {
+				P[iphi] = pre.copy(); // accept reflection
+				fP[iphi] = fpre; Nre++;
+			} else {
+				pco = pce + 0.5*(pce-P[iphi]);
+				fpco = f(pco);
+				if(fpco<fphi) {
+					P[iphi] = pco.copy(); // accept contraction
+					fP[iphi] = fpco; Nco++;
+				} else {
+					//do reduction
+					for(int i=0; i<d+1; i++) {
+						if(i!=iplo) {
+							P[i] = 0.5*(P[i]+P[iplo]);
+							fP[i] = f(P[i]);
+						}
+						Nrd++;
+					}
+				}
+			}
+		}
+	} 
+	
+	if(printData==true) {
+		WriteLine($"Simplex converged using {Nre} reflections, {Nex} expansions,");
+		WriteLine($" {Nco} contractions and {Nrd} reductions.");
+		}
+
+	// Finding averge point and returning
+	vector avg = new vector(d);
+	for(int i=0; i<d+1; i++) {
+		avg+=P[i]/(d+1);
+		}
+	return avg;
+}
+
+
+
+} // class Mini: end
+
+
+
