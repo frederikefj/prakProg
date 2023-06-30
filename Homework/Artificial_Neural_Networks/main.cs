@@ -153,7 +153,7 @@ for(int i=0; i<M; i++) {
 
 File.WriteAllText("out.ann1Fit.data", toWriteFit);
 
-
+WriteLine("Results shown in \"ann1.svg\"");
 
 //ann1.p.print();
 
