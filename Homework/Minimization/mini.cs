@@ -97,7 +97,6 @@ public static vector simplex(Func<vector, double> f,
 		) {
 
 	int d = P.size1;
-	WriteLine($"d={d}");
 	vector fP = new vector(d+1);
 	for(int i=0; i<d+1; i++) fP[i] = f(P[i]);
 

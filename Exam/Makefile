@@ -1,14 +1,14 @@
-default : Out.txt
+default : Out.txt points.svg
 
 DLLS = $(addprefix -reference:,$(filter %.dll,$^))
 CODE = $(filter %.cs,$^)
 MKEXE = mcs -target:exe -out:$@ $(DLLS) $(CODE)
 MKDLL = mcs -target:library -out:$@ $(DLLS) $(CODE)
 
-Out.txt : main.exe
+Out.txt out.points2.data out.points2min.data : main.exe
 	mono main.exe > Out.txt -target:$@
 
-main.exe : main.cs matrix.dll mini.dll func.dll; $(MKEXE)
+main.exe : main.cs matrix.dll func.dll optimization.dll; $(MKEXE)
 
 DIR = ../matlib/matrix
 matrix.dll : $(DIR)/matrix.cs $(DIR)/vector.cs
@@ -19,11 +19,14 @@ mini.dll : $(DIR2)/mini.cs matrix.dll ; $(MKDLL)
 
 func.dll : func.cs matrix.dll ; $(MKDLL)
 
+optimization.dll : optimization.cs matrix.dll func.dll mini.dll; $(MKDLL)
+
 clean :
 	$(RM) *.dll *.exe [Oo]ut* *.svg
 
-#Aplot.svg : Aplot.gpi out.points.data out.fz.data out.Integ.data
-#	gnuplot $<
+points.svg : points.gpi out.points2.data out.points2min.data
+	gnuplot $<
+
 
 
 #spline.dll : spline.cs matrix.dll

@@ -17,8 +17,8 @@ public static void halton(int n, int startBase, int d, vector x) {
 } // qrand class end
 
 public class points{
-matrix x;
-int n;
+public matrix x;
+public int n;
 public points(int d,int n0, int startBase = -1) {
 	n = n0;
 	x = new matrix(d,n);
@@ -37,14 +37,21 @@ public points(int d,int n0, int startBase = -1) {
 	
 	}
 }
+
+// Finding the farthest distance from other points and the sides
 public double distance(vector a) {
 	if(a.size != x[0].size) throw new ArgumentException($"points.dist: vector(d={a.size}) does not match dimension of points(d={x[0].size})");
 	double minDist = (x[0]-a).norm();
+	if(a[0] < 0 | a[0] > 1 | a[1]<0 | a[1]>1) {return 0;}
 	for(int i=1; i<n; i++) {
 		double iDist = (x[i]-a).norm();
 		if(iDist < minDist) minDist = iDist; 
-		}	
-	return minDist;
+		}
+	if(a[0] < minDist) minDist = a[0];
+	if(1-a[0] < minDist) minDist = 1-a[0];
+	if(a[1] < minDist) minDist = a[1];
+	if(1-a[1] < minDist) minDist = 1-a[1];
+	return -minDist;
 	}
 
 } // points class: end

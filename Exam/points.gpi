@@ -1,0 +1,13 @@
+set terminal svg
+set key outside
+set key right top
+set output "points.svg"
+set xlabel "x"
+set ylabel "y"
+set size square
+set tics out
+set title "Maximum distance to Points"
+plot [0:1][0:1] \
+ "out.points2.data" with points pointtype 7 pointsize 0.2 title "points" \
+,"out.points2min.data" with points pointtype 8 pointsize 0.5 title "Maximum distance to points" \
+,"out.points2circle.data" with lines linewidth 1 title "empty area"
